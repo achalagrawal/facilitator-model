@@ -1,31 +1,63 @@
-# React + TypeScript + Vite
+# Organic Products Home Delivery Business Model Simulator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web-based simulator that allows users to model and analyze the financial aspects of an organic products home delivery business. It provides an interactive interface to adjust various business parameters and visualize the resulting financial outcomes.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Input fields for key business parameters:
+  - Average Order Value
+  - Margin Percentage
+  - Delivery Cost
+  - Delivery Salary
+  - Customer Acquisition Cost
+  - Orders per Customer per Month
+  - Number of Customers
+- Real-time calculation of financial metrics:
+  - Revenue
+  - Cost of Goods Sold
+  - Gross Profit
+  - Delivery Costs
+  - Salary Costs
+  - Acquisition Costs
+  - Total Expenses
+  - Net Profit
+  - Break-even Point
+- Visual representations of financial data:
+  - Bar chart comparing Revenue, Gross Profit, and Net Profit
+  - Pie chart showing expense breakdown
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
 
-- Configure the top-level `parserOptions` property like this:
+   ```
+   git clone https://github.com/achalagrawal/facilitator-model
+   cd facilitator-model
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. Install dependencies:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# facilitator-model
+   ```
+   pnpm install
+   ```
+
+3. Run the development server:
+
+   ```
+   pnpm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173` to view the application.
+
+## Technologies Used
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Recharts for data visualization
+- Radix UI for accessible UI components
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
