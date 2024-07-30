@@ -212,7 +212,7 @@ const BusinessModelSimulator = () => {
                   `${name} ${(percent * 100).toFixed(0)}%`
                 }
               >
-                {expensePieChartData.map((entry, index) => (
+                {expensePieChartData.map((_, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
