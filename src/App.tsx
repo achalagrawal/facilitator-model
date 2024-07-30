@@ -1,19 +1,9 @@
 import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
+import Header from "@/components/Header";
+import InputSection from "@/components/InputSection";
+import ResultsSection from "@/components/ResultsSection";
+import ChartsSection from "@/components/ChartsSection";
+import Footer from "@/components/Footer";
 
 const BusinessModelSimulator = () => {
   const [averageOrderValue, setAverageOrderValue] = useState(650);
@@ -35,8 +25,6 @@ const BusinessModelSimulator = () => {
     netProfit: 0,
     breakEven: 0,
   });
-
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
   useEffect(() => {
     const calculateMetrics = () => {
@@ -93,135 +81,33 @@ const BusinessModelSimulator = () => {
   ];
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Facilitator Model Simulator</h2>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <Label htmlFor="averageOrderValue">Average Order Value (Rs)</Label>
-          <Input
-            id="averageOrderValue"
-            type="number"
-            value={averageOrderValue}
-            onChange={(e) => setAverageOrderValue(Number(e.target.value))}
+    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="relative py-3 sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+        <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+          <Header />
+          <InputSection
+            averageOrderValue={averageOrderValue}
+            setAverageOrderValue={setAverageOrderValue}
+            margin={margin}
+            setMargin={setMargin}
+            deliveryCost={deliveryCost}
+            setDeliveryCost={setDeliveryCost}
+            deliverySalary={deliverySalary}
+            setDeliverySalary={setDeliverySalary}
+            acquisitionCost={acquisitionCost}
+            setAcquisitionCost={setAcquisitionCost}
+            ordersPerMonth={ordersPerMonth}
+            setOrdersPerMonth={setOrdersPerMonth}
+            numCustomers={numCustomers}
+            setNumCustomers={setNumCustomers}
           />
-        </div>
-        <div>
-          <Label htmlFor="margin">Margin (%)</Label>
-          <Input
-            id="margin"
-            type="number"
-            value={margin}
-            onChange={(e) => setMargin(Number(e.target.value))}
+          <ResultsSection financials={financials} />
+          <ChartsSection
+            financialBarChartData={financialBarChartData}
+            expensePieChartData={expensePieChartData}
           />
-        </div>
-        <div>
-          <Label htmlFor="deliveryCost">Delivery Cost (Rs)</Label>
-          <Input
-            id="deliveryCost"
-            type="number"
-            value={deliveryCost}
-            onChange={(e) => setDeliveryCost(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          <Label htmlFor="deliverySalary">Delivery Salary (Rs)</Label>
-          <Input
-            id="deliverySalary"
-            type="number"
-            value={deliverySalary}
-            onChange={(e) => setDeliverySalary(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          <Label htmlFor="acquisitionCost">
-            Customer Acquisition Cost (Rs)
-          </Label>
-          <Input
-            id="acquisitionCost"
-            type="number"
-            value={acquisitionCost}
-            onChange={(e) => setAcquisitionCost(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          <Label htmlFor="ordersPerMonth">Orders per Customer per Month</Label>
-          <Input
-            id="ordersPerMonth"
-            type="number"
-            value={ordersPerMonth}
-            onChange={(e) => setOrdersPerMonth(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          <Label htmlFor="numCustomers">Number of Customers</Label>
-          <Input
-            id="numCustomers"
-            type="number"
-            value={numCustomers}
-            onChange={(e) => setNumCustomers(Number(e.target.value))}
-          />
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-2">
-          Financial Results (Monthly)
-        </h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p>Revenue: Rs {financials.revenue.toFixed(2)}</p>
-            <p>Cost of Goods Sold: Rs {financials.cogs.toFixed(2)}</p>
-            <p>Gross Profit: Rs {financials.grossProfit.toFixed(2)}</p>
-            <p>Delivery Costs: Rs {financials.deliveryCosts.toFixed(2)}</p>
-            <p>Salary Costs: Rs {financials.salaryCosts.toFixed(2)}</p>
-            <p>
-              Acquisition Costs: Rs {financials.acquisitionCosts.toFixed(2)}
-            </p>
-            <p>Total Expenses: Rs {financials.totalExpenses.toFixed(2)}</p>
-            <p>Net Profit: Rs {financials.netProfit.toFixed(2)}</p>
-            <p>Break-even Point: {financials.breakEven.toFixed(2)} orders</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-2">Revenue vs Profit</h4>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={financialBarChartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-        <div className="mt-6">
-          <h4 className="text-lg font-semibold mb-2">Expense Breakdown</h4>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={expensePieChartData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
-                }
-              >
-                {expensePieChartData.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+          <Footer />
         </div>
       </div>
     </div>
